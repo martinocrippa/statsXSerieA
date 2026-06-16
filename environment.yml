@@ -10,5 +10,6 @@ dependencies:
   - statsmodels
   - scipy
   - matplotlib
+  - seaborn
   - jupyter
   - pip

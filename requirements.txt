@@ -6,4 +6,5 @@ scikit-learn
 statsmodels
 scipy
 matplotlib
+seaborn  # solo per docs/genera_grafici.py
 jupyter
