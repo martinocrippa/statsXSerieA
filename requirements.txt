@@ -1,0 +1,8 @@
+# Dipendenze per l'analisi statsXSerieA
+pandas
+numpy
+requests
+scikit-learn
+seaborn
+matplotlib
+jupyter

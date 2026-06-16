@@ -1,0 +1,13 @@
+name: statsxseriea
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  - pandas
+  - numpy
+  - requests
+  - scikit-learn
+  - seaborn
+  - matplotlib
+  - jupyter
+  - pip

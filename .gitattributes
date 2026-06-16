@@ -1,0 +1,6 @@
+# Fine-riga stabili (collaborazione Mac/Windows): evita diff spuri sui CSV
+*.csv text eol=lf
+*.py text eol=lf
+*.ipynb text eol=lf
+*.md text eol=lf
+*.yml text eol=lf
