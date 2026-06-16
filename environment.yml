@@ -7,7 +7,8 @@ dependencies:
   - numpy
   - requests
   - scikit-learn
-  - seaborn
+  - statsmodels
+  - scipy
   - matplotlib
   - jupyter
   - pip

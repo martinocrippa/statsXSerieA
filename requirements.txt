@@ -3,6 +3,7 @@ pandas
 numpy
 requests
 scikit-learn
-seaborn
+statsmodels
+scipy
 matplotlib
 jupyter
