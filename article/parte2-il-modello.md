@@ -1,97 +1,94 @@
-# Si può leggere gennaio?
+# Cosa conta a metà stagione
 ### Parte 2 — Il modello
 
-*Il campione d'inverno vince il 73% delle volte. Ma cosa distingue chi poi alza la coppa da chi si fa rimontare? Lo abbiamo chiesto a una regressione — con prudenza.*
+*Il campione d'inverno vince il 73% delle volte. Ma cosa distingue chi poi alza la coppa da chi si fa rimontare? L'abbiamo chiesto a una regressione, con prudenza.*
 
-Nella prima parte avevamo lasciato una domanda aperta. Se non tutti i primati di metà stagione valgono uguale — la Juventus che converte quasi sempre, le rimonte che ogni tanto rovesciano il tavolo — allora dev'esserci qualcosa, già a gennaio, che separa il campione d'inverno destinato al titolo da quello che sfumerà. La forza? Il margine? Proviamo a misurarlo.
+Nella prima parte era rimasta una domanda. Non tutti i primati di metà stagione valgono uguale: la Juventus converte quasi sempre, ogni tanto qualcuno viene rimontato. Allora qualcosa, già a gennaio, deve separare il campione d'inverno che vince da quello che no. La forza? Il margine? Proviamo a misurarlo.
 
-## Perché qui non si "prevede"
+## Non è una previsione
 
-Prima un avvertimento, che è anche metodo. Le stagioni sono trentatré: pochissime. Con così pochi casi, allenare un modello a *prevedere* e vantarsi dell'accuratezza è un esercizio fragile — il risultato balla a ogni scelta. La domanda giusta, a questi numeri, non è "quanto prevedo bene", ma "c'è un'associazione, quanto è forte, quanto è incerta?". Si legge il modello, non lo si fa giocare d'azzardo. È una differenza di postura, e cambia tutto.
+Prima un avvertimento, che è anche metodo. Le stagioni sono trentatré: pochissime. Con così pochi casi, allenare un modello a prevedere e vantarsi della sua precisione è fragile, perché il risultato cambia a ogni scelta. La domanda giusta non è "quanto prevedo bene", ma "c'è un legame, quanto è forte, quanto è incerto". Si legge il modello, non lo si fa scommettere.
 
-## L'unica cosa che conta
+## Conta solo il distacco
 
-Messa così, la regressione logistica dà una risposta pulita: l'unica variabile che sposta davvero l'ago è il **distacco sul secondo** a metà stagione. Ogni punto di margine in più aumenta di circa la metà le probabilità di chiudere davanti. Non è un effetto enorme — con n=33 nulla lo è in modo netto — ma è il solo segnale che resta in piedi.
+La regressione dà una risposta pulita: l'unica cosa che sposta davvero le probabilità è il distacco sul secondo a metà stagione. Ogni punto di margine in più aumenta di circa la metà le probabilità di chiudere primo. Non è un effetto enorme, con 33 stagioni niente lo è, ma è il solo segnale che regge.
 
-E si vede a occhio nudo: chi all'andata ha un margine risicato, due punti o meno, vince poi il 62% delle volte; chi ne ha tre-cinque sale al 69%; e chi chiude con almeno sei punti di vantaggio, in trentatré anni, ha sempre vinto — sette su sette. Un primo assaggio di quella «soglia» su cui torneremo.
+> **Come si legge — l'odds ratio.** "Aumenta di circa la metà" vuol dire odds ratio 1,5: ogni punto di margine moltiplica per 1,5 le quote di vincere. Le quote, non la probabilità diretta.
 
-![Conversione per ampiezza del distacco a fine andata](../docs/modello.png)
+E si vede a occhio. Chi all'andata ha un margine corto, due punti o meno, vince poi il 62% delle volte. Chi ne ha da tre a cinque, il 69%. Chi chiude con almeno sei punti, in trentatré anni ha sempre vinto: sette su sette. Un primo assaggio di quella "soglia" di cui parleremo.
 
-## Quello che NON conta (e va detto)
+![Conversione per ampiezza del distacco a fine andata][g-modello]
 
-La parte più istruttiva, però, è ciò che *non* funziona. Abbiamo provato la forza assoluta, i punti per partita: niente, i campioni d'inverno sono tutti forti e la forza varia troppo poco per distinguerli. Abbiamo separato l'attacco dalla difesa, gol fatti e gol subiti: segnale praticamente nullo, la "difesa che vince i campionati" qui non si vede. Abbiamo misurato quanto fosse affollata la corsa alle spalle del primo: ma quella, a conti fatti, è solo il distacco visto da un altro lato.
+## Quello che non conta
+
+La parte più istruttiva è ciò che non funziona. Abbiamo provato la forza assoluta, i punti per partita: niente, i campioni d'inverno sono tutti forti e si somigliano troppo. Abbiamo separato attacco e difesa, gol fatti e gol subiti: segnale quasi nullo. Abbiamo misurato quanto fosse affollata la corsa dietro al primo: ma quello è solo il distacco, visto da un altro lato.
 
 | Cosa abbiamo provato | Aggiunge segnale? |
 |---|---|
-| Distacco sul secondo | Sì — l'unico (p ≈ 0,07) |
+| Distacco sul secondo | Sì, l'unico |
 | Differenza reti | Quasi nulla |
-| Punti/partita (forza assoluta) | No |
-| Attacco e difesa separati | No (≈ zero) |
-| Contendibilità (rivali vicini) | È il distacco, visto da un altro lato |
+| Punti per partita | No |
+| Attacco e difesa separati | No |
+| Rivali vicini | È il distacco, da un altro lato |
 
-Il messaggio converge: conta *di quanto* sei primo, non *quanto* sei forte né *come* giochi. È un risultato negativo, di quelli che raramente finiscono in un titolo di giornale, e proprio per questo vale la pena scriverlo.
+Il messaggio è chiaro: conta di quanto sei primo, non quanto sei forte né come giochi.
 
-![Cosa distingue chi converte: solo il distacco sul secondo si stacca da zero](../docs/regressori.png)
+![Cosa distingue chi converte: solo il distacco sul secondo si stacca da zero][g-regressori]
 
-Messa in un grafico, la cosa è netta. Di tutte le caratteristiche del campione d'inverno — forza, attacco, difesa, differenza reti — solo il distacco sul secondo distingue davvero chi poi vince da chi si fa rimontare: la sua barra è l'unica che non tocca lo zero. Tutto il resto è indistinguibile dal caso (e con appena nove rimontati, le bande d'incertezza sono larghe).
+> **Come si legge — la differenza standardizzata.** Misura quanto chi converte e chi si fa rimontare differiscono su una caratteristica, in deviazioni standard. Zero vuol dire nessuna differenza; più la barra è lontana da zero, più quella caratteristica separa i due gruppi.
 
-Una precisazione, però, prima di seppellire la difesa. Un conto è chiedersi *chi converte* tra i primi d'inverno, un altro *chi diventa campione*. E lì la difesa pesa eccome: in trentatré stagioni il campione d'Italia ha avuto la miglior difesa del torneo nel 73% dei casi, il miglior attacco solo nel 39%. La vecchia idea che «la difesa vince i campionati» nei numeri c'è. Solo che la difesa serve a *costruire* il vantaggio; a spiegare se un vantaggio già costruito regge, no — quello dipende da quanto è grande.
+Nel grafico si vede subito: di tutte le caratteristiche del campione d'inverno, solo il distacco si stacca da zero. Attacco, difesa, forza, differenza reti restano indistinguibili dal caso. E con appena nove squadre rimontate, le bande di incertezza sono larghe.
 
-## L'Inter 2025/26, e una previsione onesta
+Una cosa, però, prima di seppellire la difesa. Un conto è chiedersi chi converte tra i primi d'inverno, un altro chi diventa campione. E lì la difesa pesa: in trentatré stagioni il campione d'Italia ha avuto la miglior difesa nel 73% dei casi, il miglior attacco solo nel 39%[^calc]. "La difesa vince i campionati" nei numeri c'è. Ma la difesa serve a costruire il vantaggio; a dire se un vantaggio già costruito regge, no. Quello dipende da quanto è grande.
 
-Una prova, per gioco e per onestà. Quest'anno il campione d'inverno è stato l'Inter, con tre punti di margine. Abbiamo addestrato il modello su tutte le altre stagioni — tenendo fuori proprio questa — e gli abbiamo chiesto: che probabilità dai all'Inter? Ha risposto circa il 70%. L'Inter ha poi vinto.
+## La prova: l'Inter 2025/26
 
-Modello promosso? Calma. Quel 70% è quasi identico al tasso storico: con un margine modesto, il modello non fa che dire "di solito sì". Non ci ha azzeccato per bravura, ma perché la base di partenza è già alta — e un 70% lascia comunque tre possibilità su dieci che andasse storto. Una stagione sola non promuove né boccia nessuno.
+Una prova, per gioco e per onestà. Quest'anno il campione d'inverno è stato l'Inter, con tre punti di margine. Abbiamo addestrato il modello su tutte le altre stagioni, tenendo fuori questa, e gli abbiamo chiesto: che probabilità dai all'Inter? Ha risposto circa il 70%. L'Inter ha poi vinto.
 
-## Da una domanda nascono domande
+> **Come si legge — la prova "out-of-sample".** Il modello impara senza la stagione da giudicare, poi prova a indovinarla. Così non bara: non ha già visto la risposta.
 
-Eravamo partiti da una provocazione tra colleghi, e siamo finiti — giustamente — con più domande di quante ne avessimo all'inizio. Quelle che restano aperte:
+Modello promosso? Calma. Quel 70% è quasi uguale al tasso storico: con un margine piccolo, il modello dice solo "di solito sì". Non ci ha azzeccato per bravura, ma perché la base di partenza è alta. E un 70% lascia comunque tre possibilità su dieci che vada storto. Una stagione sola non promuove e non boccia nessuno.
 
-- vale solo per la Serie A, o è una legge del calcio? Per scoprirlo servirebbe guardare gli altri campionati, ma senza mescolarli: ognuno è un caso a sé, andrebbero distinti (con variabili di lega o interazioni).
-- esiste una **soglia** oltre la quale il titolo è praticamente certo — un margine, o un monte-punti, dopo il quale non si torna indietro?
-- il vantaggio dell'inverno è cambiato nel tempo, tra ere di una sola dominatrice ed ere più aperte?
-- e se invece di "vince / non vince" guardassimo *di quanto* si vince a fine stagione?
-- la difesa fa il campione (73% dei casi) più dell'attacco (39%): è sempre stato così, in tutte le ere? E con dati più ricchi — tiri, possesso, *expected goals* — quali altri tratti di gioco distinguono un campione?
-- una domanda diversa, lo stesso spirito: le neopromosse dalla Serie B partono forte e si spengono? Una curva di rendimento per blocchi di giornate direbbe se il «fuoco di paglia» esiste davvero, o è solo un'impressione.
+## Le domande aperte
 
-E poi i passi più tecnici, che il piccolo numero di stagioni richiede: stimare la probabilità con un approccio **bayesiano** (una Beta-Binomiale dà la risposta con il suo intervallo di credibilità), intervalli via **bootstrap**, una logistica penalizzata (**Firth**) pensata per i campioni piccoli, un modello **gerarchico** che tratti ogni squadra per quello che è. E, soprattutto, **più dati**: le stagioni storiche pre-1993, che non esistono in un file pronto e andrebbero ricostruite.
+Eravamo partiti da una provocazione tra colleghi, e finiamo con più domande di prima. Quelle che restano:
 
-C'è anche un modo più onesto di leggere il legame. Il campione d'inverno non vince *perché* è campione d'inverno: lo diventa *perché* ha già mostrato, in mezza stagione, le qualità che servono a vincere — continuità, solidità, una rosa profonda. Il primato di gennaio non è una causa, è una **spia**: non una profezia, ma un buon proxy della forza espressa fin lì. Per questo gli allenatori lo sdrammatizzano — «non conta niente, quello che conta è arrivare a maggio in testa», ha tagliato corto Chivu da campione d'inverno in carica — mentre i numeri, loro, un po' contano. Le due cose non si contraddicono: il titolo non garantisce niente, ma chi se lo prende, di solito, è la squadra giusta.
+- vale solo per la Serie A, o per tutto il calcio? Servirebbe guardare gli altri campionati, senza mescolarli: ognuno è un caso a sé.
+- esiste una soglia oltre cui il titolo è quasi certo? Un margine, o un monte-punti, dopo cui non si torna indietro.
+- la difesa fa il campione più dell'attacco (73% contro 39%): è sempre stato così, in tutte le epoche? E con dati più ricchi, come tiri, possesso ed expected goals, cos'altro conta?
+- le neopromosse dalla Serie B partono forte e si spengono? Una curva di rendimento per blocchi di giornate lo direbbe.
+- il pronostico salta per coppe, mercato di gennaio, infortuni: Immobile, da dentro, insiste sul peso del doppio impegno[^imm]. Si possono provare come variabili?
+- e se invece di "vince o non vince" guardassimo di quanto si vince?
 
-Resta il punto di partenza, che il modello non scalfisce ma anzi conferma: il campione d'inverno parte nettamente favorito, e ciò che a gennaio fa la differenza è quanto chiaramente è in testa. Trentatré stagioni sono poche per chiamarla legge. È una tendenza forte — e quel 27% di primi traditi dalla primavera è la parte più bella, la prova che il calcio un margine alla rimonta lo lascia sempre.
+Ci sono poi i passi tecnici, che il piccolo numero di stagioni richiede: una stima bayesiana con il suo intervallo, intervalli da bootstrap, una logistica adatta ai campioni piccoli (Firth), un modello che tratti ogni squadra per sé. E soprattutto più dati: le stagioni prima del 1993, che non esistono già pronte e andrebbero ricostruite.
+
+C'è anche un modo più onesto di leggere il legame. Il campione d'inverno non vince perché è campione d'inverno. Lo diventa perché ha già mostrato, in mezza stagione, le qualità che servono per vincere: continuità, solidità, una rosa profonda. Il primato di gennaio non è una causa, è una spia. Per questo gli allenatori lo ridimensionano ("non conta niente, conta arrivare a maggio in testa", ha tagliato corto Chivu da campione d'inverno in carica[^chivu]), mentre i numeri un po' contano. Le due cose non si escludono: il titolo non garantisce niente, ma chi se lo prende, di solito, è la squadra giusta.
+
+Resta il punto di partenza, che il modello conferma. Il campione d'inverno parte nettamente favorito, e a gennaio fa la differenza quanto è chiaramente in testa. Trentatré stagioni sono poche per chiamarla legge: è una tendenza forte. E quel 27% di primi traditi dalla primavera è la parte più bella, la prova che una rimonta è sempre possibile.
 
 ---
 
 ## Nota metodologica
 
-- **Campione d'inverno**: primo quando ogni squadra ha completato l'andata (`min partite ≥ n−1`). Identità verificata contro le fonti per le ultime 10 stagioni (10 su 10); resta una piccola imprecisione sui punti assoluti del primo (rinvii), non sul distacco.
-- **Test**: proporzione storica con intervallo di Wilson; contingenza su tutte le coppie squadra-stagione con test esatto di Fisher (preferito al chi-quadro per le frequenze attese basse).
-- **Modello**: regressione logistica (statsmodels) letta sui parametri; regressori del campione d'inverno a fine andata. Valutazione Leave-One-Out e prova out-of-sample sull'Inter 2025/26. A n=33 si leggono direzioni e ordini di grandezza, non certezze.
+- **Campione d'inverno**: primo quando ogni squadra ha completato l'andata (partite giocate ≥ n−1). Verificato contro le fonti nelle ultime 10 stagioni. Resta una piccola imprecisione sui punti assoluti del primo, per i rinvii, non sul distacco.
+- **Test**: proporzione storica con intervallo di Wilson; tavola di contingenza su tutte le coppie squadra-stagione con test esatto di Fisher, più adatto del chi-quadro quando le frequenze attese sono basse.
+- **Modello**: regressione logistica letta sui parametri, non sull'accuratezza. Regressori del campione d'inverno a fine andata. Valutazione Leave-One-Out e prova out-of-sample sull'Inter 2025/26. Con 33 stagioni si leggono direzioni e ordini di grandezza, non certezze.
 
-  Dettaglio dei regressori provati:
+Regressori provati:
 
-  | Regressore | pseudo-R² | p-value |
-  |---|---|---|
-  | distacco sul secondo | 0,14 | 0,07 |
-  | + differenza reti | — | 0,71 |
-  | punti/partita (forza assoluta) | 0,02 | 0,40 |
-  | gol fatti + subiti per partita | 0,00 | ≈ 0,9 |
-  | contendibilità (rivali entro 5 punti) | 0,10 | 0,07 (collineare col distacco) |
+| Regressore | pseudo-R² | p-value |
+|---|---|---|
+| distacco sul secondo | 0,14 | 0,07 |
+| + differenza reti | — | 0,71 |
+| punti per partita | 0,02 | 0,40 |
+| gol fatti + subiti per partita | 0,00 | ≈ 0,9 |
+| rivali entro 5 punti | 0,10 | 0,07 (legato al distacco) |
 
-- Codice, tabelle e test nel [notebook del progetto](../analisi/probScudettoSeCampioneInverno.ipynb); i grafici sono in [`docs/`](../docs/).
+I numeri vengono dal notebook del progetto, dove ci sono codice, tabelle e test.
 
----
+[^calc]: Numeri nostri su 33 stagioni (1993/94–2025/26), dati football-data.co.uk; calcolati nel notebook del progetto.
+[^chivu]: [Sportal](https://www.sportal.it/calcio/serie-a/inter-lecce-cristian-chivu-il-titolo-d-inverno-non-conta-eusebio-di-francesco-si-tiene-la-prestazione.html) — Chivu: «il titolo d'inverno non conta».
+[^imm]: [FCInter1908](https://www.fcinter1908.it/news/interviste/immobile-intervista-scudetto-inter-inzaghi/) — Immobile sul peso del doppio impegno e delle tante partite.
 
-## Linkografia
-
-**I nostri numeri** — percentuali, regressioni, intervalli e test sono nel [notebook del progetto](../analisi/probScudettoSeCampioneInverno.ipynb); i grafici in [`docs/`](../docs/). La rassegna completa delle fonti è in [`resources/`](../resources/).
-
-**Le fonti citate** (pubbliche, divulgative e giornalistiche, non peer-reviewed — numeri indicativi):
-
-- [Lega Serie A](https://www.legaseriea.it/serie-a/news/inter-col-lecce-per-diventare-campione-d-inverno) — il campione d'inverno nella storia (63 su 93, 67,7%).
-- [Sky Sport](https://sport.sky.it/calcio/serie-a/serie-a-campioni-inverno-scudetto-precedenti) — campioni d'inverno e scudetto, i precedenti.
-- [Calcio e Finanza](https://www.calcioefinanza.it/2026/01/05/serie-a-campione-dinverno-2026-chi-e/) — cos'è il campione d'inverno (un titolo «puramente giornalistico»).
-- [PokerStars News](https://www.pokerstarsnews.it/calcio/campione-inverno-cosa-significa-statistiche/37019/) — cosa significa e le statistiche (a metà stagione «i valori sono già delineati»).
-- [SportMediaset](https://www.sportmediaset.mediaset.it/calcio/inter/inter-campione-inverno-statistica-scudetto_107743377-202602k.shtml) — la statistica scudetto nell'era recente (~79%).
-- [Sportal](https://www.sportal.it/calcio/serie-a/inter-lecce-cristian-chivu-il-titolo-d-inverno-non-conta-eusebio-di-francesco-si-tiene-la-prestazione.html) — Chivu: «il titolo d'inverno non conta».
-- [FCInter1908](https://www.fcinter1908.it/news/interviste/immobile-intervista-scudetto-inter-inzaghi/) — Immobile sul peso del doppio impegno e delle tante partite.
+[g-modello]: ../docs/modello.png
+[g-regressori]: ../docs/regressori.png

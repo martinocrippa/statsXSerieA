@@ -17,6 +17,7 @@ import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from matplotlib.ticker import PercentFormatter
 import seaborn as sns
 from statsmodels.stats.proportion import proportion_confint
 
@@ -125,16 +126,28 @@ def g_distribuzioni(d):
     serie = [("Punti del campione d'inverno", d["pti_inverno"], BLU),
              ("Punti del campione d'Italia", d["pti_campione"], VIO),
              ("Punti aggiunti dopo l'inverno", d["delta"], VER)]
-    fig, axes = plt.subplots(1, 3, figsize=(15, 4.2))
+    fig, axes = plt.subplots(1, 3, figsize=(15, 4.4))
     for ax, (titolo, dati, col) in zip(axes, serie):
-        sns.histplot(dati, kde=True, color=col, ax=ax, alpha=0.55)
+        lo = int(np.floor(dati.min() / 5) * 5)
+        hi = int(np.ceil(dati.max() / 5) * 5)
+        bins = list(range(lo, hi + 5, 5))
+        counts, edges = np.histogram(dati, bins=bins)
+        probs = counts / counts.sum()
+        centri = [(a + b) / 2 for a, b in zip(edges[:-1], edges[1:])]
+        ax.bar(centri, probs, width=4.6, color=col, alpha=0.8, edgecolor="white")
+        for p, c in zip(probs, centri):
+            if p > 0:
+                ax.text(c, p + 0.012, f"{p * 100:.0f}%", ha="center", fontsize=8, color="#555")
         ax.axvline(dati.mean(), color="black", ls="--", lw=1.3, label=f"media {dati.mean():.0f}")
-        ax.axvline(dati.median(), color=ROSSO, ls=":", lw=1.6, label=f"mediana {dati.median():.0f}")
+        ax.axvline(dati.median(), color=ROSSO, ls=":", lw=1.7, label=f"mediana {dati.median():.0f}")
         ax.set_title(titolo, fontsize=12, weight="bold")
-        ax.set_xlabel("punti")
-        ax.set_ylabel("stagioni")
+        ax.set_xlabel("punti (intervalli da 5)")
+        ax.set_ylabel("quota di stagioni")
+        ax.set_xticks(bins)
+        ax.yaxis.set_major_formatter(PercentFormatter(1.0))
+        ax.set_ylim(0, probs.max() * 1.3)
         ax.legend(frameon=False, fontsize=9)
-    fig.suptitle("Distribuzioni dei punti (33 stagioni): primato d'inverno, titolo, e quanto si aggiunge dopo",
+    fig.suptitle("Distribuzione dei punti (33 stagioni): quota di stagioni per intervallo di 5 punti",
                  fontsize=13)
     sns.despine(fig)
     fig.tight_layout(rect=(0, 0, 1, 0.95))
