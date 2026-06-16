@@ -74,7 +74,7 @@ Curtosi in eccesso (0 = normale). Con 33 stagioni, asimmetria e curtosi vanno pr
 [^sm]: [SportMediaset](https://www.sportmediaset.mediaset.it/calcio/inter/inter-campione-inverno-statistica-scudetto_107743377-202602k.shtml) — la statistica scudetto nell'era recente (~79%).
 [^cds]: [Corriere dello Sport](https://www.corrieredellosport.it/news/calcio/serie-a/milan/2026/01/07-145696785/il_calcolo_preciso_di_allegri_su_scudetto_e_champions_ecco_quanti_punti_servono) — Allegri sulla quota-punti da scudetto (86-88).
 
-[g-risultati]: ../docs/risultati.png
-[g-era]: ../docs/era.png
-[g-cumulata]: ../docs/cumulata.png
-[g-distribuzioni]: ../docs/distribuzioni.png
+[g-risultati]: risultati.png
+[g-era]: era.png
+[g-cumulata]: cumulata.png
+[g-distribuzioni]: distribuzioni.png

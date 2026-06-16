@@ -23,7 +23,7 @@ from statsmodels.stats.proportion import proportion_confint
 
 ROOT = Path(__file__).resolve().parent.parent
 SILVER = ROOT / "data" / "silver"
-OUT = ROOT / "docs"
+OUT = ROOT / "article"
 
 BLU, GRI, VIO, VER = "#2F6DB5", "#C9CCD1", "#8E6BA8", "#3A8A6E"
 ROSSO = "#c0392b"

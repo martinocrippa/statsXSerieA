@@ -32,7 +32,7 @@ In concreto:
 Sulle 33 stagioni il campione d'inverno vince poi lo scudetto **24 volte su 33,
 circa il 73%** (intervallo di Wilson 95%: 56%–85%).
 
-![Risultati](docs/risultati.png)
+![Risultati](article/risultati.png)
 
 La media però nasconde molto:
 - per squadra la conversione va da Juventus 12/13 (92%) a Fiorentina 0/1, con Inter 86%, Milan 60%, Napoli 50%, Roma 33%;
@@ -101,8 +101,7 @@ statsXSerieA/
 │   └── silver/
 ├── analisi/
 │   └── probScudettoSeCampioneInverno.ipynb
-├── article/        i due articoli (.md + .pdf)
-├── docs/           i grafici (.png) + genera_grafici.py
+├── article/        articoli (.md + .pdf), grafici (.png) e genera_grafici.py
 ├── resources/      letteratura e fonti
 ├── environment.yml
 ├── requirements.txt
@@ -138,10 +137,10 @@ Per rigenerare o aggiornare il magazzino dati (scarica e prepara tutto):
 python -m pipeline.run_pipeline
 ```
 
-Per rigenerare i grafici di `docs/` (a partire da `data/silver/`):
+Per rigenerare i grafici (a partire da `data/silver/`):
 
 ```
-python docs/genera_grafici.py
+python article/genera_grafici.py
 ```
 
 ## Occhio metodologico-statistico
@@ -174,7 +173,7 @@ odds ratio), o usare tecniche più adatte al piccolo n — vedi i next step.
 - Analisi ampliata: parte esplorativa, distribuzioni e indici di dispersione, conversione per era e stima cumulata, tavola di contingenza (con test), lettura statistica della logistica (statsmodels) e bontà del modello (ROC, matrice di confusione).
 - Codice rivisto: classifica vettorializzata (niente `iterrows`), niente duplicazioni, snake_case/PEP8, `random_state` fissato. Risultati invariati.
 - Aggiunti README, requirements.txt, environment.yml.
-- Aggiunti i due articoli divulgativi (con export PDF) e i grafici, riproducibili con `docs/genera_grafici.py`.
+- Aggiunti i due articoli divulgativi (con export PDF) e i grafici, riproducibili con `article/genera_grafici.py`.
 
 ## Crediti
 

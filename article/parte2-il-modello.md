@@ -90,5 +90,5 @@ I numeri vengono dal notebook del progetto, dove ci sono codice, tabelle e test.
 [^chivu]: [Sportal](https://www.sportal.it/calcio/serie-a/inter-lecce-cristian-chivu-il-titolo-d-inverno-non-conta-eusebio-di-francesco-si-tiene-la-prestazione.html) — Chivu: «il titolo d'inverno non conta».
 [^imm]: [FCInter1908](https://www.fcinter1908.it/news/interviste/immobile-intervista-scudetto-inter-inzaghi/) — Immobile sul peso del doppio impegno e delle tante partite.
 
-[g-modello]: ../docs/modello.png
-[g-regressori]: ../docs/regressori.png
+[g-modello]: modello.png
+[g-regressori]: regressori.png
