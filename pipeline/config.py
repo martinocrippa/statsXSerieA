@@ -12,8 +12,8 @@ SILVER = DATA / "silver"
 LEAGUE = "I1"
 BASE_URL = "https://www.football-data.co.uk/mmz4281"
 
-# Stagioni: anno di inizio, dal 1993/94 al 2024/25
-START_YEARS = range(1993, 2025)
+# Stagioni: anno di inizio, dal 1993/94 al 2025/26
+START_YEARS = range(1993, 2026)
 
 # Le uniche colonne che servono all'analisi
 ANALYSIS_COLUMNS = ["Date", "HomeTeam", "AwayTeam", "FTHG", "FTAG"]
